@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAF_DBJ_IA", "DAF_DBJ_IA\DAF_DBJ_IA.csproj", "{B40455C7-8F8B-4C28-AD39-98FED9974D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{5CD4F7E3-6E9A-42F8-8D2A-F331B2F05582}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B40455C7-8F8B-4C28-AD39-98FED9974D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40455C7-8F8B-4C28-AD39-98FED9974D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B40455C7-8F8B-4C28-AD39-98FED9974D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B40455C7-8F8B-4C28-AD39-98FED9974D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD4F7E3-6E9A-42F8-8D2A-F331B2F05582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD4F7E3-6E9A-42F8-8D2A-F331B2F05582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD4F7E3-6E9A-42F8-8D2A-F331B2F05582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD4F7E3-6E9A-42F8-8D2A-F331B2F05582}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

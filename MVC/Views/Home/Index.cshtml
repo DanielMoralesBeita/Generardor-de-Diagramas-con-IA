@@ -1,0 +1,296 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+ 
+
+ 
+    ViewBag.Title = "Generador de Documentación";
+}
+
+<h2>Generador Automático de Documentación</h2>
+
+<form method="post" action="@Url.Action("Generar", "Home")" id="myForm" name="myForm">
+    <label>Ingresa el tema:</label>
+    <input type="text" name="inputTexto" class="form-control" required />
+    <select name="tipoDiagrama" id="tipoDiagrama">
+        <option value="flowchart TB">Flowchart (Top-Bottom)</option>
+        <option value="flowchart LR">Flowchart (Left-Right)</option>
+        <option value="flowchart RL">Flowchart (Right-Left)</option>
+        <option value="flowchart BT">Flowchart (Bottom-Top)</option>
+        <option value="sequenceDiagram">Sequence Diagram</option>
+        <option value="classDiagram">Class Diagram</option>
+        <option value="stateDiagram">State Diagram</option>
+        <option value="erDiagram">Entity-Relationship Diagram</option>
+        <option value="gantt">Gantt Chart</option>
+        <option value="pie">Pie Chart</option>
+        <option value="mindmap">Mindmap</option>
+        <option value="timeline">Timeline</option>
+        <option value="journey">User Journey</option>
+        <option value="quadrantChart">Quadrant Chart</option>
+    </select>
+    <select name="modelo" id="modelo">
+        <option value="0">OpenAI</option>
+        <option value="1">Ollama</option> 
+    </select>
+    <button type="submit" class="btn btn-primary mt-2" name="generaPapu" id="generaPapu">Generar</button>
+</form>
+@* <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script> *@
+@* <div id="diagramContainer" class="mermaid">
+    flowchart TB
+    inicio((Inicio))
+    inicio --> autenticacion{Autenticación}
+    autenticacion --> |Usuario Validado| menu_principal[Menú Principal]
+    autenticacion --> |Usuario No Validado| fin((Fin))
+
+    menu_principal --> ventas[Ventas]
+    menu_principal --> facturacion[Facturación]
+    menu_principal --> compras[Compras]
+    menu_principal --> inventario[Inventario]
+
+    ventas --> consulta_productos[Consulta de Productos]
+    ventas --> realizar_venta[Realizar Venta]
+    realizar_venta --> factura[Factura de Venta]
+    factura --> fin
+
+    facturacion --> generar_factura[Generar Factura]
+    generar_factura --> enviar_factura[Enviar Factura]
+    enviar_factura --> fin
+
+    compras --> proveedores[Proveedores]
+    compras --> orden_compra[Orden de Compra]
+    orden_compra --> recibir_productos[Recibir Productos]
+    recibir_productos --> actualizar_inventario[Actualizar Inventario]
+    actualizar_inventario --> fin
+
+    inventario --> visualizar_stock[Visualizar Stock]
+    inventario --> ajuste_inventario[Ajuste de Inventario]
+    ajuste_inventario --> fin
+     
+</div>
+<button id="downloadBtn" class="btn btn-primary">Descargar como PNG</button>
+<script>
+
+      // Función para codificar correctamente en Base64
+    function base64Encode(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    // Función para convertir Base64 a Blob
+    function base64ToBlob(base64, mimeType) {
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        return new Blob([byteArray], { type: mimeType });
+    }
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+        const svgElement = document.querySelector("#diagramContainer svg");
+
+        if (!svgElement) {
+            alert("No se encontró el SVG.");
+            return;
+        }
+
+        // Convertir SVG a string
+        const serializer = new XMLSerializer();
+        let svgString = serializer.serializeToString(svgElement);
+
+        // Codificar el SVG correctamente a Base64
+        const base64Data = base64Encode(svgString);
+
+        // Convertir Base64 en Blob
+        const blob = base64ToBlob(base64Data, "image/svg+xml");
+
+        // Crear URL del Blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Crear y activar el enlace de descarga
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "diagrama.svg";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Liberar memoria del objeto URL
+        URL.revokeObjectURL(blobUrl);
+    });
+</script>
+ *@@* 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> *@
+@* <script type="module">
+
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({ startOnLoad: true });</script> *@
+@* <div id="diagramContainer" class="mermaid">
+    flowchart TD
+     FormularioRegistro -->|Correcto| DatosVerificados
+     FormularioRegistro -->|Incorrecto| CorreccionInformacion
+     DatosVerificados -->|Registrado| EnviarConfirmacion
+     CorreccionInformacion --> FormularioRegistro
+</div>
+<div id="diagramContainer2" class="mermaid">
+flowchart TD
+    A[Inicio CHATGPT] --> B{¿Usuario registrado?}
+    B -- No --> C[Formulario de Registro]
+    C --> D[Guardar datos en la base de datos]
+    D --> E[Pedir autenticación]
+    B -- Sí --> E
+    E --> F[Ingresar usuario y contraseña]
+    F --> G{¿Credenciales correctas?}
+    G -- No --> H[Mostrar error y reintentar]
+    H --> F
+    G -- Sí --> I[Acceso concedido]
+    I --> J[Fin]
+</div>
+<div id="diagramContainer2" class="mermaid">
+
+    flowchart TD
+        A[Inicio Mistral] --> B{¿Es la primera vez que ingresa al sistema?}
+        B -- No --> C[Registro de Usuario]
+        C --> D{Nombre de usuario disponible?}
+        D -- Si --> E[Contraseña]
+        E --> F{Contraseña confirmada?}
+        F -- Si --> G[Usuario registrado]
+        G --> H[Inicio sesión]
+        H --> I[Autenticación correcta?]
+        I -- Si --> J[Bienvenido, usuario!]
+        I -- No --> K[Error: Incorrecto nombre de usuario o contraseña]
+        B -- Sí --> L[Inicio sesión]
+        L --> M[Autenticación correcta?]
+        M --> N[Bienvenido, usuario!]
+        M --> O[Error: Incorrecto nombre de usuario o contraseña]
+</div> *@
+<script>
+       document.getElementById("generaPapu").addEventListener("click", () => {
+          // event.preventDefault();
+        const loader = document.getElementById("loader-overlay"); // Asegúrate de que exista un elemento con id="loader"
+        loader.style.display = 'flex';
+        
+    });
+    /*  var form = document.getElementById('myForm');
+      form.addEventListener('submit', function(e) {
+          var loader = document.getElementById('loader');
+          loader.style.display = 'flex'; // Muestra el loader
+          // Aquí se dispara el submit normalmente
+          // Si deseas evitar el envío inmediato, podrías llamar a e.preventDefault()
+          // y luego, por ejemplo, hacer una validación o retrasar el envío.
+      });*/
+    </script>
+<div id="diagramContainer" class="mermaid" >
+    @if (ViewBag.Documento != null)
+    {
+    @Html.Raw(ViewBag.DiagramaMermaid)
+    }
+    @if (ViewBag.Documento == null)
+    {
+@Html.Raw(
+            "\n    graph TD;\n        A[Inicio] --> B{Hacer algo};\n        B -- Yes --> C[Accion Ejemplo];\n        B -- No  --> D[Finalizar];\n        C --> E[Siguiente Accion];\n        D --> E;\n        E --> F[Fin del proceso];\n\n\n"
+
+)
+
+    }
+</div>
+<button id="downloadBtn" class="btn btn-primary" >Descargar como SVG</button>
+
+@if (ViewBag.Documento != null)
+{
+    <h3>Resultado:</h3>
+    <pre  >@ViewBag.Documento</pre>
+    <form method="post" action="@Url.Action("Generar2", "Home")" id="myForm2" name="myForm2">
+
+        <textarea style="height: 452px;WIDTH: 400PX;" name="SolotextoSoyyo" id="SolotextoSoyyo">@Html.Raw(ViewBag.DiagramaMermaid)</textarea>
+    
+        <button type="submit" class="btn btn-primary mt-2">Generar2</button>
+    </form>
+    <form method="post" action="@Url.Action("Generar3", "Home")" id="myForm3" name="myForm3">
+
+        <textarea style="height: 452px;WIDTH: 400PX;" name="inputTexto2" id="inputTexto2">@Html.Raw(ViewBag.DiagramaMermaid)</textarea>
+        <select name="modelo2" id="modelo2">
+            <option value="0">OpenAI</option>
+            <option value="1">Ollama</option>
+        </select>
+        <button type="submit" class="btn btn-primary mt-2">Generar3</button>
+    </form>
+  
+     
+        <!-- Botón para descargar -->
+
+
+ @*    <script type="module">
+        
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      
+        mermaid.initialize({ startOnLoad: true });
+    </script> *@
+    <script>
+           try {
+         mermaid.initialize({ startOnLoad: true });
+                } catch (error) {
+            console.error("Error al inicializar los scripts:", error);
+        }
+          try {
+         $(document).ready(function () {
+          // Función para codificar correctamente en Base64
+        function base64Encode(str) {
+            return btoa(unescape(encodeURIComponent(str)));
+        }
+
+        // Función para convertir Base64 a Blob
+        function base64ToBlob(base64, mimeType) {
+            const byteCharacters = atob(base64);
+            const byteNumbers = new Array(byteCharacters.length);
+
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            return new Blob([byteArray], { type: mimeType });
+        }
+         
+        document.getElementById("downloadBtn").addEventListener("click", () => {
+            const svgElement = document.querySelector("#diagramContainer svg");
+
+            if (!svgElement) {
+                alert("No se encontró el SVG.");
+                return;
+            }
+
+            // Convertir SVG a string
+            const serializer = new XMLSerializer();
+            let svgString = serializer.serializeToString(svgElement);
+
+            // Codificar el SVG correctamente a Base64
+            const base64Data = base64Encode(svgString);
+
+            // Convertir Base64 en Blob
+            const blob = base64ToBlob(base64Data, "image/svg+xml");
+
+            // Crear URL del Blob
+            const blobUrl = URL.createObjectURL(blob);
+
+            // Crear y activar el enlace de descarga
+            const link = document.createElement("a");
+            link.href = blobUrl;
+            link.download = "diagrama.svg";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Liberar memoria del objeto URL
+            URL.revokeObjectURL(blobUrl);
+        });
+        });
+             } catch (error) {
+            console.error("Error al inicializar los scripts:", error);
+        }
+    </script>
+}
